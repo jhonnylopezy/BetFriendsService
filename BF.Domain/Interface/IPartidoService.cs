@@ -1,10 +1,14 @@
-﻿using System;
+﻿using BF.Domain.DTO;
+using BF.Domain.Model;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace BF.Domain.Interface
 {
-    interface IPartidoService
+   public  interface IPartidoService
     {
+        Task<RespuestaModel<List<PartidoDTO>>> ObtenerPartidosXJornada(int id_jornada);
     }
 }
