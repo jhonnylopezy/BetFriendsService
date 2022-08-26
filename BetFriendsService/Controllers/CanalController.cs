@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BetFriendsService.Controllers
 {
-
+    [Route("api/[controller]/[action]")]
     public class CanalController : Controller
     {
         private readonly ICanalService _canalService;
@@ -19,13 +19,15 @@ namespace BetFriendsService.Controllers
             this._canalService = _canalService;
         }
         // GET: CanalController
-        [Route("canal/listar")]
+        [HttpGet]
+        [Route("")]
         public async Task<ActionResult<RespuestaModel<List<CanalDTO>>>> Listar()
         {
             var resultado= await this._canalService.ObtenerCanales();
             return Ok(resultado);
         }
-        [Route("canal/Participante/{id_participante}")]
+        [HttpGet]
+        [Route("{id_participante}")]
         public async Task<ActionResult<RespuestaModel<List<CanalDTO>>>> Participante(int id_participante)
         {
             var resultado = await this._canalService.ObtenerCanalesPorParticipante(id_participante);

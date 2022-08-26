@@ -8,6 +8,6 @@ namespace BF.Domain.Interface
 {
    public  interface IJornadaData
     {
-        Task<JornadaEntity> ObtenerJornadas(int id_canal);
+        Task<IEnumerable<JornadaEntity>> ObtenerJornadas();
     }
 }

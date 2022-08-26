@@ -4,11 +4,15 @@ using System.Text;
 
 namespace BF.Domain.Entity
 {
-   public class JornadaEntity
+    public class PartidoEntity
     {
         public long id { get; set; }
-        public string nombre { get; set; }
+        public DateTime fecha { get; set; }
+        public string hora { get; set; }
+        public string lugar { get; set; }
         public string estado { get; set; }
+        public bool empate { get; set; }
+        public long id_jornada { get; set; }
         public DateTime fecha_creacion { get; set; }
         public DateTime fecha_modificacion { get; set; }
     }

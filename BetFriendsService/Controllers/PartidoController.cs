@@ -9,79 +9,17 @@ namespace BetFriendsService.Controllers
 {
     public class PartidoController : Controller
     {
-        // GET: PartidoController
-        public ActionResult Index()
+        public IPartidoService _partidoService;
+        public PartidoController()
         {
-            return View();
-        }
 
-        // GET: PartidoController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
         }
-
-        // GET: PartidoController/Create
-        public ActionResult Create()
+        [HttpGet]
+        [Route("{id_participante}")]
+        public async Task<ActionResult<RespuestaModel<List<CanalDTO>>>> Participante(int id_participante)
         {
-            return View();
-        }
-
-        // POST: PartidoController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PartidoController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: PartidoController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PartidoController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: PartidoController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var resultado = await this._canalService.ObtenerCanalesPorParticipante(id_participante);
+            return Ok(resultado);
         }
     }
 }

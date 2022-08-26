@@ -34,6 +34,9 @@ namespace BetFriendsService
             services.AddScoped<ICanalService, CanalService>();
             services.AddTransient<ICanalData, CanalData>();
 
+            services.AddScoped<IJornadaService, JornadaService>();
+            services.AddTransient<IJornadaData, JornadaData>();
+
             services.AddControllers();
         }
 

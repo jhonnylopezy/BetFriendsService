@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BF.Domain.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,7 @@ namespace BetFriendsService.Controllers.Seguridad
     
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Autenticar( )
+        public ActionResult Autenticar([FromBody] LoginRequestModel loginModel )
         {
             try
             {
