@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using BF.Domain.DTO;
+using BF.Domain.Interface;
+using BF.Domain.Model;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -7,81 +10,19 @@ using System.Threading.Tasks;
 
 namespace BetFriendsService.Controllers
 {
+    [Route("api/[controller]/[action]")]
     public class PronosticoController : Controller
     {
-        // GET: PronosticoController
-        public ActionResult Index()
+        public IPronosticoService _pronosticoService;
+        public PronosticoController(IPronosticoService _pronosticoService)
         {
-            return View();
+            this._pronosticoService = _pronosticoService;
         }
-
-        // GET: PronosticoController/Details/5
-        public ActionResult Details(int id)
+        [HttpPost]        
+        public async Task<ActionResult<RespuestaModel<string>>> Registrar([FromBody]PronosticoDTO pPronostico)
         {
-            return View();
-        }
-
-        // GET: PronosticoController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: PronosticoController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PronosticoController/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: PronosticoController/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: PronosticoController/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: PronosticoController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var resultado = await this._pronosticoService.Registrar(pPronostico);
+            return Ok(resultado);
         }
     }
 }

@@ -32,7 +32,8 @@ namespace Service
                 lugar=partido.lugar,
                 nombre_equipo=partido.nombre_equipo,
                 pais_equipo=partido.pais_equipo,
-                tipo_equipo=partido.tipo_equipo                
+                tipo_equipo=partido.tipo_equipo,
+                id_partido_equipo= partido.id_partido_equipo
             }).ToList();
                 return resultadoDTO;
             });

@@ -40,6 +40,9 @@ namespace BetFriendsService
             services.AddScoped<IPartidoService, PartidoService>();
             services.AddTransient<IPartidoData, PartidoData>();
 
+            services.AddScoped<IPronosticoService, PronosticoService>();
+            services.AddTransient<IPronosticoData, PronosticoData>();
+
             services.AddControllers();
         }
 
