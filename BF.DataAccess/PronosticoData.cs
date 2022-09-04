@@ -1,4 +1,6 @@
-﻿using BF.Domain.Interface;
+﻿using BF.Domain.DTO;
+using BF.Domain.Entity;
+using BF.Domain.Interface;
 using BF.Domain.Model;
 using Dapper;
 using Microsoft.Extensions.Configuration;
@@ -17,6 +19,7 @@ namespace BF.DataAccess
         {
             this.connectionString = configuration.GetSection("ConnectionStrings").GetSection("DefaultConnection").Value;
         }
+
         public async Task<IEnumerable<RespuestaFunctionModel>> Registrar(string pronosticoData)
         {
             IEnumerable<RespuestaFunctionModel> respuesta = null;
@@ -32,6 +35,20 @@ namespace BF.DataAccess
             }
             return respuesta;
         }
+        public async Task<IEnumerable<PronosticoEntity>> ObtenerPronosticoXCanal(int id_canal)
+        {
+            IEnumerable<PronosticoEntity> respuesta = null;
+            var sql = @"SELECT * FROM bet.obtener_pronosticos_x_canal(@id_canal)";
+            var sqlParam = new
+            {
+                id_canal= id_canal
+            };
 
+            using (var connection = new NpgsqlConnection(this.connectionString))
+            {
+                respuesta = await connection.QueryAsync<PronosticoEntity>(sql, sqlParam);
+            }
+            return respuesta;
+        }
     }
 }

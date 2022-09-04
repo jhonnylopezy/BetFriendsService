@@ -1,4 +1,6 @@
-﻿using BF.Domain.Entity;
+﻿using BF.Domain.DTO;
+using BF.Domain.Entity;
+using BF.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,5 +12,6 @@ namespace BF.Domain.Interface
     {
         Task<IEnumerable<CanalEntity>> ObtenerCanales();
         Task<IEnumerable<CanalEntity>> ObtenerCanalesPorParticipante(int idParticipante);
+        Task<IEnumerable<RespuestaFunctionModel>> RegistrarParticipante(ParticipanteCanalDTO participanteCanalDTO);
     }
 }

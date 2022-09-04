@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using BF.Domain.Entity;
 
 namespace Service
 {
@@ -17,7 +18,28 @@ namespace Service
         {
             this._pronosticoData = _pronosticoData;
         }
-        public async Task<RespuestaModel<string>> Registrar(PronosticoDTO pronosticoDTO)
+
+        public async Task<RespuestaModel<List<PronosticoDTO>>> PronosticoXCanal(int id_canal)
+        {
+            return await Utils.Metodo.FuncionConExcepcionAsync<List<PronosticoDTO>>(async () => {
+
+                
+                var resultadoLista = await this._pronosticoData.ObtenerPronosticoXCanal(id_canal);
+                var resultadoDato = resultadoLista.Select(pronostico=>new PronosticoDTO{ 
+                    estado= pronostico.estado,
+                    fecha_creacion=pronostico.fecha_creacion,
+                    id=pronostico.id,
+                    id_participante_canal=pronostico.id_participante_canal,
+                    nombre=pronostico.nombre,
+                    ordinal=pronostico.ordinal,
+                    puntos=pronostico.puntos
+                }).ToList();
+
+                return resultadoDato;
+            });
+        }
+
+        public async Task<RespuestaModel<string>> Registrar(PronosticoPartidoDTO pronosticoDTO)
         {
             return await Utils.Metodo.FuncionConExcepcionAsync<string>(async ()=>{
 

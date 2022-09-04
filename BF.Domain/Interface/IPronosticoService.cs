@@ -9,6 +9,7 @@ namespace BF.Domain.Interface
 {
     public interface IPronosticoService
     {
-        Task<RespuestaModel<string>> Registrar(PronosticoDTO pronosticoDTO);
+        Task<RespuestaModel<string>> Registrar(PronosticoPartidoDTO pronosticoDTO);
+        Task<RespuestaModel<List<PronosticoDTO>>> PronosticoXCanal(int id_canal);
     }
 }

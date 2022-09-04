@@ -1,6 +1,7 @@
 ﻿using BF.Domain.DTO;
 using BF.Domain.Interface;
 using BF.Domain.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,6 +12,7 @@ using System.Threading.Tasks;
 namespace BetFriendsService.Controllers
 {
     [Route("api/[controller]/[action]")]
+    [Authorize]
     public class ParticipanteController : Controller
     {
         private readonly IParticipanteService _participanteService;

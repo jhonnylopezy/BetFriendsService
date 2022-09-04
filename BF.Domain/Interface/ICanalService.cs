@@ -11,5 +11,6 @@ namespace BF.Domain.Interface
     {
         Task<RespuestaModel<List<CanalDTO>>> ObtenerCanales();
         Task<RespuestaModel<List<CanalDTO>>> ObtenerCanalesPorParticipante(int id_participante);
+        Task<RespuestaModel<string>> RegistrarParticipante(ParticipanteCanalDTO participanteCanalDTO);
     }
 }

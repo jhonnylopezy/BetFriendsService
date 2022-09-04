@@ -1,5 +1,7 @@
-﻿using BF.Domain.Entity;
+﻿using BF.Domain.DTO;
+using BF.Domain.Entity;
 using BF.Domain.Interface;
+using BF.Domain.Model;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
@@ -42,6 +44,23 @@ namespace BF.DataAccess
             using (var connection = new NpgsqlConnection(this.cadenaConexion))
             {
                 respuesta = await connection.QueryAsync<CanalEntity>(sql,sqlParam);
+            }
+            return respuesta;
+        }
+
+        public async Task<IEnumerable<RespuestaFunctionModel>> RegistrarParticipante(ParticipanteCanalDTO participanteCanalDTO)
+        {
+            IEnumerable<RespuestaFunctionModel> respuesta = null;
+            var sql = @"SELECT * FROM bet.registrar_participante_en_canal(@id_participante,@id_canal)";
+            var sqlParam = new
+            {
+                id_participante = participanteCanalDTO.id_participante,
+                id_canal= participanteCanalDTO.id_canal
+            };
+
+            using (var connection = new NpgsqlConnection(this.cadenaConexion))
+            {
+                respuesta = await connection.QueryAsync<RespuestaFunctionModel>(sql, sqlParam);
             }
             return respuesta;
         }

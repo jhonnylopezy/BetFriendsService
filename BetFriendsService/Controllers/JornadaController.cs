@@ -1,6 +1,7 @@
 ﻿using BF.Domain.DTO;
 using BF.Domain.Interface;
 using BF.Domain.Model;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 namespace BetFriendsService.Controllers
 {
     [Route("api/[controller]/[action]")]
+    [Authorize]
     public class JornadaController : Controller
     {
         private readonly IJornadaService _jornadaService;

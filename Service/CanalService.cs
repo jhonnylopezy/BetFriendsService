@@ -53,5 +53,14 @@ namespace Service
             });
             
         }
+
+        public async Task<RespuestaModel<string>> RegistrarParticipante(ParticipanteCanalDTO participanteCanalDTO)
+        {
+            return await Utils.Metodo.FuncionConExcepcionAsync<string>(async () =>
+            {
+                var resultadoRegistro = await this._canalData.RegistrarParticipante(participanteCanalDTO);
+                return resultadoRegistro.First().returns;
+            });
+        }
     }
 }
