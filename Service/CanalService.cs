@@ -1,4 +1,5 @@
-﻿using BF.Domain.DTO;
+﻿using BF.Domain;
+using BF.Domain.DTO;
 using BF.Domain.Interface;
 using BF.Domain.Model;
 using Newtonsoft.Json;
@@ -59,6 +60,8 @@ namespace Service
             return await Utils.Metodo.FuncionConExcepcionAsync<string>(async () =>
             {
                 var resultadoRegistro = await this._canalData.RegistrarParticipante(participanteCanalDTO);
+                if (resultadoRegistro.First().returns != CodigosRespuesta.EXITOSO)
+                    throw new ArgumentException(resultadoRegistro.First().returns);
                 return resultadoRegistro.First().returns;
             });
         }

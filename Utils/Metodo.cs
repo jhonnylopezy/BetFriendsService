@@ -23,9 +23,9 @@ namespace Utils
             {
                 return new RespuestaModel<T>
                 {
-                    errCode = ar.Message.Split('|')[1],
-                    errMessage = ar.Message.Split('|')[2],
-                    data = default(T)
+                    errCode = ar.Message.Split('|')[0],
+                    errMessage = ar.Message.Split('|')[1],
+                    data= default(T)
                 };
             }
             catch (Exception e)

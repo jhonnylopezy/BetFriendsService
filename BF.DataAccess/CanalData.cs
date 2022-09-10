@@ -51,7 +51,7 @@ namespace BF.DataAccess
         public async Task<IEnumerable<RespuestaFunctionModel>> RegistrarParticipante(ParticipanteCanalDTO participanteCanalDTO)
         {
             IEnumerable<RespuestaFunctionModel> respuesta = null;
-            var sql = @"SELECT * FROM bet.registrar_participante_en_canal(@id_participante,@id_canal)";
+            var sql = @"SELECT registrar_participante_en_canal as returns FROM bet.registrar_participante_en_canal(@id_participante,@id_canal)";
             var sqlParam = new
             {
                 id_participante = participanteCanalDTO.id_participante,

@@ -5,7 +5,7 @@ using System.Text;
 namespace BF.Domain.Model
 
 {
-    public class RespuestaModel <T>
+    public class RespuestaModel<T>
     {
 
         public string errCode { get; set; }

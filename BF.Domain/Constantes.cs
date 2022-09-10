@@ -5,11 +5,12 @@ namespace BF.Domain
 {
     public static class Constantes
     {
-        public static class CodigosRespuesta
-        {
-            public const string EXITOSO = "BF000";
-            
-        }
         
+        
+    }
+    public static class CodigosRespuesta
+    {
+        public const string EXITOSO = "BF000";
+
     }
 }
