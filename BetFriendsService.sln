@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BF.DataAccess", "BF.DataAcc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Service", "Service\Service.csproj", "{A33E0F42-CA89-4853-8FFB-C0F43EDFA3D3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utils", "Utils\Utils.csproj", "{F8F370D9-9F95-4525-BC42-F46BCE1B2A2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utils", "Utils\Utils.csproj", "{F8F370D9-9F95-4525-BC42-F46BCE1B2A2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BetFriends.FE", "BetFriends.FE\BetFriends.FE.csproj", "{05D9440B-CBC9-41F2-AD58-49A60BA95E65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{F8F370D9-9F95-4525-BC42-F46BCE1B2A2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8F370D9-9F95-4525-BC42-F46BCE1B2A2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8F370D9-9F95-4525-BC42-F46BCE1B2A2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05D9440B-CBC9-41F2-AD58-49A60BA95E65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05D9440B-CBC9-41F2-AD58-49A60BA95E65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05D9440B-CBC9-41F2-AD58-49A60BA95E65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05D9440B-CBC9-41F2-AD58-49A60BA95E65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
