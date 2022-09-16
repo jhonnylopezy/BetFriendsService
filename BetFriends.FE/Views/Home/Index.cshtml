@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -10,56 +11,31 @@
 <h2>Lista Pronostico</h2>
 
 <div class="row">
-    <table id="table2">
+    <table id="t_pronostico">
         <thead>
             <tr>
                 <th data-field="id">ID</th>
-                <th data-field="name">Item Name</th>
-                <th data-field="price">Item Price</th>
+                <th data-field="nombre">Nombre</th>
+                <th data-field="ordinal">Ordinal</th>
+                <th data-field="estado">Estado</th>
+                <th data-field="puntos">Puntos</th>
+                <th data-field="id_participante_canal">Id Participante</th>
+                <th data-field="fecha_creacion">Fecha creacion</th>
             </tr>
         </thead>
     </table>
 
 </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-  
-<script>
-    var $table = $('#table2')
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+
+ <script>
+
+    var $table = $('#t_pronostico');
 
     $(function () {
-        var data = [
-            {
-                'id': 0,
-                'name': 'Item 0',
-                'price': '$0'
-            },
-            {
-                'id': 1,
-                'name': 'Item 1',
-                'price': '$1'
-            },
-            {
-                'id': 2,
-                'name': 'Item 2',
-                'price': '$2'
-            },
-            {
-                'id': 3,
-                'name': 'Item 3',
-                'price': '$3'
-            },
-            {
-                'id': 4,
-                'name': 'Item 4',
-                'price': '$4'
-            },
-            {
-                'id': 5,
-                'name': 'Item 5',
-                'price': '$5'
-            }
-        ]
-        $table.bootstrapTable( { data: data })
+        var pronosticos = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Pronosticos))';
+        pronosticos = JSON.parse(pronosticos);    
+        $table.bootstrapTable({ data: pronosticos });
     })
 </script>

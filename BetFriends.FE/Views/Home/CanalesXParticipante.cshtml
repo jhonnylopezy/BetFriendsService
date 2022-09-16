@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Canales por participante";
+}
+<h2>@ViewBag.Title.</h2>
+
+<table id="t_canalesXParticipante" data-toggle="table">
+    <thead>
+        <tr>
+            <th data-field="id">Id</th>
+            <th data-field="nombre">Nombre</th>
+            <th data-field="limite">Limite</th>
+            <th data-field="estado">Estado</th>
+        </tr>
+    </thead>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+
+<script>
+
+    var $table = $('#t_canalesXParticipante');
+
+    $(function () {
+        var canales = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Canales))';
+        canales = JSON.parse(canales);
+        $table.bootstrapTable({ data: canales });
+    })
+</script>

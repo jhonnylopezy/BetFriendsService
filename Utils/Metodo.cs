@@ -1,5 +1,10 @@
-﻿using BF.Domain.Model;
+﻿using BF.Domain;
+using BF.Domain.Model;
+using Newtonsoft.Json;
 using System;
+using System.Configuration;
+using System.Net;
+using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -8,6 +13,7 @@ namespace Utils
 {
     public static class Metodo
     {
+        
         public static async Task<RespuestaModel<T>> FuncionConExcepcionAsync<T>(Func<Task<T>> fun)
         {
             try
@@ -25,7 +31,7 @@ namespace Utils
                 {
                     errCode = ar.Message.Split('|')[0],
                     errMessage = ar.Message.Split('|')[1],
-                    data= default(T)
+                    data = default(T)
                 };
             }
             catch (Exception e)
@@ -59,6 +65,39 @@ namespace Utils
                 //  return builder.ToString();
             }
             return res;
+        }
+
+        public static T EjecutarPeticion<T>(string method, string paramJson, RequestType requestType)
+        {
+            var resultadoJson = string.Empty;
+            var urlBetFriend = ConfigurationManager.AppSettings["URL_BETFRIEND"];
+            try
+            {
+                using (var client = new WebClient())
+                {
+                    client.Headers[HttpRequestHeader.ContentType] = "application/json";
+                    switch (requestType)
+                    {
+                        case RequestType.POST:
+                            resultadoJson = client.UploadString(urlBetFriend + method, JsonConvert.SerializeObject(paramJson));
+                            break;
+                        case RequestType.GET:
+                            resultadoJson = client.DownloadString(urlBetFriend + method);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                
+            }
+           
+
+            var principalResult = JsonConvert.DeserializeObject<T>(resultadoJson);
+
+            return principalResult;
         }
     }
 }

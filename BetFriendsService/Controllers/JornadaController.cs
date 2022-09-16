@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace BetFriendsService.Controllers
 {
     [Route("api/[controller]/[action]")]
-    [Authorize]
+    //[Authorize]
     public class JornadaController : Controller
     {
         private readonly IJornadaService _jornadaService;
