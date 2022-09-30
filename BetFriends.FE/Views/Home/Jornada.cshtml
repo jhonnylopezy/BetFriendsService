@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Jornada";
+}
+
+<h2>Jornada</h2>
+<table id="t_jornada" data-toggle="table">
+    <thead>
+        <tr>
+            <th data-field="id">Id</th>
+            <th data-field="nombre">Nombre</th>            
+            <th data-field="estado">Estado</th>
+        </tr>
+    </thead>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+
+<script>
+
+    var $table = $('#t_jornada');
+
+    $(function () {
+        var jornadas = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Jornadas))';
+        jornadas = JSON.parse(jornadas);
+        $table.bootstrapTable({ data: jornadas });
+    })
+</script>

@@ -18,13 +18,22 @@ namespace BF.Domain
         public const string PRONOSTICO_X_CANAL = "api/pronostico/ListarPorCanal";
         public const string REGISTRAR = "Registrar";
     }
+    public static class PartidoMethod
+    {
+        public const string PARTIDO_X_JORNADA = "api/partido/ListarXJornada";
+        
+    }
     public static class CanalMethod
     {
         public const string LISTAR= "api/canal/listar";
         public const string CANALES_X_PARTICIPANTE = "api/canal/participante";
         public const string REGISTRAR_PARTICIPANTE_EN_CANAL = "api/Canal/SuscribirParticipante";
     }
-
+    public static class JornadaMethod
+    {
+        public const string LISTAR= "api/jornada/listar";        
+    }
+    
     public enum RequestType{
         POST=1,
         GET=2

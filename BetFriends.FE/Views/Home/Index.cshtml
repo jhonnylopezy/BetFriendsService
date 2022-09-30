@@ -26,16 +26,22 @@
     </table>
 
 </div>
-
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Nuevo</button>
 <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
-
- <script>
+@Html.Partial("Modal")
+<script>
 
     var $table = $('#t_pronostico');
+    var $tableJornada = $('#t_jornada');
 
     $(function () {
         var pronosticos = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Pronosticos))';
-        pronosticos = JSON.parse(pronosticos);    
+        pronosticos = JSON.parse(pronosticos);
         $table.bootstrapTable({ data: pronosticos });
+
+         var jornadas = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Jornadas))';
+        jornadas = JSON.parse(jornadas );
+        $tableJornada.bootstrapTable({ data: jornadas });
+
     })
 </script>
