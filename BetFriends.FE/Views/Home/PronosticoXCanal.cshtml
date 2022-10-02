@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewBag.Title = "PronosticoXCanal";
+}
+
+<h2>Lista Pronostico X Canal</h2>
+
+<div class="row">
+    <table id="t_pronostico2">
+        <thead>
+            <tr>
+                <th data-field="id">ID</th>
+                <th data-field="nombre">Nombre</th>
+                <th data-field="ordinal">Ordinal</th>
+                <th data-field="estado">Estado</th>
+                <th data-field="puntos">Puntos</th>
+                <th data-field="id_participante_canal">Id Participante</th>
+                <th data-field="fecha_creacion">Fecha creacion</th>
+            </tr>
+        </thead>
+    </table>
+
+</div>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Nuevo</button>
+<script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+@Html.Partial("Modal")
+<script>
+
+    var $table = $('#t_pronostico2');
+    var $tableJornada = $('#t_jornada');
+    $(function () {
+        var pronosticos = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Pronosticos))';
+        pronosticos = JSON.parse(pronosticos);
+        $table.bootstrapTable({ data: pronosticos });
+
+          var jornadas = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Jornadas))';
+        jornadas = JSON.parse(jornadas );
+        $tableJornada.bootstrapTable({ data: jornadas });
+
+    })
+</script>

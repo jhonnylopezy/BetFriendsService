@@ -3,116 +3,58 @@
     ViewBag.Title = "PartidoPorJornada";
 }
 
+
 <form>
-    <div class="row" style="padding-top:100px">
-        <div class="col-4" style=" background-color: #d3d9d3; border: 3px solid;">
-            <div style="display:inline-block">
-                <div style="display:block">
-                    <img src="~/Content/icon/brazil.png" width="50px" height="50px" />
+    <div class="row  gx-5" style="padding-top:100px">
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div class="col-4" style=" background-color: #d3d9d3; border: 3px solid;">
+                <div style="display:inline-block">
+                    <div style="display:block">
+                        <img src="@Model[i].imagen" width="50px" height="50px" />
+                    </div>
+
+                    <div class="form-check form-check-inline" style="display:block">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <label class="form-check-label" for="inlineRadio1">@Model[i].nombre_equipo</label>
+                    </div>
+                </div>
+                <div style="display:inline-block">
+                    <div>
+                        <input type="type" name="name" value="0" style="width:50px;display:inline" />
+                        <h3 style="display: inline">VS</h3>
+                        <input type="type" name="name" value="0" style="width: 50px;display: inline" />
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <label class="form-check-label" for="inlineRadio2">Empate</label>
+                    </div>
                 </div>
 
-                <div class="form-check form-check-inline" style="display:block">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                    <label class="form-check-label" for="inlineRadio1">Brasil</label>
-                </div>
-            </div>
-            <div style="display:inline-block">
-                <div>
-                    <input type="type" name="name" value="0" style="width:50px;display:inline" />
-                    <h3 style="display: inline">VS</h3>
-                    <input type="type" name="name" value="0" style="width: 50px;display: inline" />
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">Empate</label>
-                </div>
-            </div>
+                <div style="display:inline-block">
+                    <div style="display:block">
+                        <img src="@Model[i + 1].imagen" width="50px" height="50px" />
+                    </div>
 
-            <div style="display:inline-block">
-                <div style="display:block">
-                    <img src="~/Content/icon/spain.png" width="50px" height="50px" />
-                </div>
-
-                <div class="form-check form-check-inline" style="display:block">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
-                    <label class="form-check-label" for="inlineRadio3">España</label>
+                    <div class="form-check form-check-inline" style="display:block">
+                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                        <label class="form-check-label" for="inlineRadio3">@Model[i + 1].nombre_equipo</label>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-4" style=" background-color: #d3d9d3; border: 3px solid;">
-            <div style="display:inline-block">
-                <div style="display:block">
-                    <img src="~/Content/icon/brazil.png" width="50px" height="50px" />
-                </div>
-
-                <div class="form-check form-check-inline" style="display:block">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio4" value="option1">
-                    <label class="form-check-label" for="inlineRadio1">Brasil</label>
-                </div>
-            </div>
-            <div style="display:inline-block">
-                <div>
-                    <input type="type" name="name" value="0" style="width:50px;display:inline" />
-                    <h3 style="display: inline">VS</h3>
-                    <input type="type" name="name" value="0" style="width: 50px;display: inline" />
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio5" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">Empate</label>
-                </div>
-            </div>
-
-            <div style="display:inline-block">
-                <div style="display:block">
-                    <img src="~/Content/icon/spain.png" width="50px" height="50px" />
-                </div>
-
-                <div class="form-check form-check-inline" style="display:block">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions2" id="inlineRadio6" value="option3">
-                    <label class="form-check-label" for="inlineRadio3">España</label>
-                </div>
-            </div>
-        </div>
-        <div class="col-4" style=" background-color: #d3d9d3; border: 3px solid;">
-            <div style="display:inline-block">
-                <div style="display:block">
-                    <img src="~/Content/icon/brazil.png" width="50px" height="50px" />
-                </div>
-
-                <div class="form-check form-check-inline" style="display:block">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio7" value="option1">
-                    <label class="form-check-label" for="inlineRadio1">Brasil</label>
-                </div>
-            </div>
-            <div style="display:inline-block">
-                <div>
-                    <input type="type" name="name" value="0" style="width:50px;display:inline" />
-                    <h3 style="display: inline">VS</h3>
-                    <input type="type" name="name" value="0" style="width: 50px;display: inline" />
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio8" value="option2">
-                    <label class="form-check-label" for="inlineRadio2">Empate</label>
-                </div>
-            </div>
-
-            <div style="display:inline-block">
-                <div style="display:block">
-                    <img src="~/Content/icon/spain.png" width="50px" height="50px" />
-                </div>
-
-                <div class="form-check form-check-inline" style="display:block">
-                    <input class="form-check-input" type="radio" name="inlineRadioOptions3" id="inlineRadio9" value="option3">
-                    <label class="form-check-label" for="inlineRadio3">España</label>
-                </div>
-            </div>
-        </div>
+            i++;
+        }
     </div>
-    
-
+    <button id="butVolver" type="button" class="btn btn-secondary" onclick="javascript: VolverAnteriorPantalla(@ViewBag.idCanal)">Volver</button>
 
     <button type="submit" class="btn btn-primary">Registrar Pronostico</button>
 </form>
+
+<script>
+    function VolverAnteriorPantalla(idCanal) {
+        location.href = '@Url.Action("PronosticoXCanal","Home")?idCanal=' + idCanal;
+    }
+</script>
 
 
 

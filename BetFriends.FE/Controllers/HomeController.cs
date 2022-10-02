@@ -56,13 +56,23 @@ namespace BetFriends.FE.Controllers
 
             return View();
         }
-        public ActionResult PartidoPorJornada(int idJornada)
+        public ActionResult PartidoPorJornada(int idJornada, int idCanal)
         {
             var partidos = this._partidoService.PartidoXJornada(idJornada);
             //ViewBag.Partidos = partidos;
-
+            ViewBag.idCanal = idCanal;
             return View(partidos);
         }
-        
+        public ActionResult PronosticoXCanal(int idCanal)
+        {
+            var resultado = this._pronosticoService.getPronosticoPorCanal(idCanal);
+            ViewBag.Pronosticos = resultado;
+
+            var jornadas = this._jornadaService.Listar();
+            ViewBag.Jornadas = jornadas;
+            ViewBag.idCanal = idCanal;
+            return View();
+        }
+
     }
 }

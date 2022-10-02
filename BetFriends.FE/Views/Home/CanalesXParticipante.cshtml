@@ -24,5 +24,10 @@
         var canales = '@Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(ViewBag.Canales))';
         canales = JSON.parse(canales);
         $table.bootstrapTable({ data: canales });
+
+
     })
+    $table.on('click-row.bs.table', function (row, $element, field) {
+        location.href = '@Url.Action("PronosticoXCanal", "Home")?idCanal=' + $element.id;
+    });
 </script>

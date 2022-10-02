@@ -11,7 +11,9 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <table id="t_jornada" data-toggle="table">
+                <table id="t_jornada" 
+                       data-toggle="table"                       
+                       data-click-to-select="true">
                     <thead>
                         <tr>
                             <th data-field="id">Id</th>
@@ -23,14 +25,17 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button onClick="javascript:Prueba(1)" type="button" class="btn btn-primary">Seleccionar</button>
+                <button onClick="javascript:ObtenerPartidoXJornada(1)" type="button" class="btn btn-primary">Seleccionar</button>
             </div>
         </div>
     </div>
 </div>
 <script>
-    function Prueba(idJornada) {
-        location.href = '@Url.Action("PartidoPorJornada", "Home")/' + idJornada;
-    }
+    $table = $("#t_jornada");
+
+     $table.on('click-row.bs.table', function (row, $element, field) {
+         location.href = '@Url.Action("PartidoPorJornada", "Home")?idJornada=' + $element.id + '&idCanal='+@Html.Raw(ViewBag.idCanal);
+        });
+
 
 </script>

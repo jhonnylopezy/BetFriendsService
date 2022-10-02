@@ -16,6 +16,7 @@ namespace BF.Domain.DTO
         public string nombre_equipo { get; set; }
         public string pais_equipo { get; set; }
         public string tipo_equipo { get; set; }
+        public string imagen { get; set; }
         public long id_grupo { get; set; }
         public long id_partido_equipo { get; set; }
 
