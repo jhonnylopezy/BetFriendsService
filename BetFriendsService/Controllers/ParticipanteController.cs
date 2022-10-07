@@ -30,6 +30,11 @@ namespace BetFriendsService.Controllers
             var participante = await this._participanteService.CrearParticipante(participanteModel);
             return Ok(participante);
         }
-
+        [HttpPost]        
+        public async Task<ActionResult<ParticipanteDTO>> ObtenerParticipante([FromBody] LoginRequestModel loginRequestModel)
+        {
+            var participante = await this._participanteService.Get(loginRequestModel);
+            return Ok(participante);
+        }
     }
 }

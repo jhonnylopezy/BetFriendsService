@@ -1,10 +1,14 @@
 ﻿using BetFriends.FE.Integration;
+using BetFriends.FE.Models;
 using BetFriends.FE.Service;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace BetFriends.FE.Controllers
 {
@@ -14,6 +18,9 @@ namespace BetFriends.FE.Controllers
         public readonly CanalService _canalService;
         public readonly JornadaService _jornadaService;
         public readonly PartidoService _partidoService;
+        public readonly ParticipanteService _participanteService;
+
+        int tiempoSesion;
 
         public HomeController()
         {
@@ -21,16 +28,17 @@ namespace BetFriends.FE.Controllers
             this._canalService = new CanalService();
             this._jornadaService = new JornadaService();
             this._partidoService = new PartidoService();
+            this._participanteService = new ParticipanteService();
+            this.tiempoSesion = Convert.ToInt32(ConfigurationManager.AppSettings["timeSesion"]);
         }
         public ActionResult Index()
         {
-            var resultado=this._pronosticoService.getPronosticoPorCanal(1);
-            ViewBag.Pronosticos = resultado;
+            if (!System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                return Redirect("~/Home/Login");
 
-            var jornadas = this._jornadaService.Listar();
-            ViewBag.Jornadas = jornadas;
-
+            ViewBag.Title = "Bienvenido a BetFriend";
             return View();
+           
         }
 
         public ActionResult CanalesXParticipante()
@@ -73,6 +81,56 @@ namespace BetFriends.FE.Controllers
             ViewBag.idCanal = idCanal;
             return View();
         }
+        [HttpGet]
+        public ActionResult Login(string ReturnUrl = "")
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return LogOut();
+            }
+            ViewBag.Message = "";
 
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(LoginView loginView, string ReturnUrl = "")
+        {
+            ViewBag.Message = "";
+            if (ModelState.IsValid)
+            {
+                var participante = this._participanteService.ObtenerParticipante(loginView.UserName, loginView.Password);
+                if (participante!=null)
+                {
+                    var userData = JsonConvert.SerializeObject(loginView);
+                    var authTicket = new FormsAuthenticationTicket(1, loginView.UserName, DateTime.Now, DateTime.Now.AddMinutes(this.tiempoSesion), false, userData);
+
+                    var enTicket = FormsAuthentication.Encrypt(authTicket);
+                    var faCookie = new HttpCookie(FormsAuthentication.FormsCookieName, enTicket);
+                    System.Web.HttpContext.Current.Response.Cookies.Add(faCookie);
+                    ViewBag.Message = "";
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            ViewBag.Message = "Credenciales de usuario incorrecto";
+            return View();
+        }
+        private bool ValidarLogin(LoginView loginView)
+        {
+            if (loginView.UserName == "admin" && loginView.Password == "admin")
+
+                return true;
+            else
+                return false;
+        }
+
+        public ActionResult LogOut()
+        {
+            HttpCookie cookie = new HttpCookie("Cookie1", "");
+            cookie.Expires = DateTime.Now.AddYears(-1);
+            Response.Cookies.Add(cookie);
+
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Login", "Home", null);
+        }
     }
 }

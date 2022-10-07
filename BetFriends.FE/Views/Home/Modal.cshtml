@@ -30,12 +30,47 @@
         </div>
     </div>
 </div>
-<script>
-    $table = $("#t_jornada");
 
+<div class="modal fade" id="modalForm" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Suscribir</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail1" class="form-label">Canal</label>
+                        <input type="email" class="form-control" id="nameCanal" aria-describedby="emailHelp" disabled>
+                        <div id="emailHelp" class="form-text"></div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputPassword1" class="form-label">Código de ingreso</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1">
+                    </div>
+                                        
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button onClick="javascript:ObtenerPartidoXJornada(1)" type="button" class="btn btn-primary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+   var $table = $("#t_jornada");
+  var  $modalForm = $("#modalForm");
      $table.on('click-row.bs.table', function (row, $element, field) {
          location.href = '@Url.Action("PartidoPorJornada", "Home")?idJornada=' + $element.id + '&idCanal='+@Html.Raw(ViewBag.idCanal);
         });
 
+   
+    $(function () {
 
+
+    });
+    
+    
 </script>

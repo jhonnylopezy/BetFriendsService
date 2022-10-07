@@ -23,6 +23,11 @@ namespace BF.Domain
         public const string PARTIDO_X_JORNADA = "api/partido/ListarXJornada";
         
     }
+    public static class ParticipanteMethod
+    {
+        public const string OBTENER_PARTICIPANTE= "api/Participante/ObtenerParticipante";
+
+    }
     public static class CanalMethod
     {
         public const string LISTAR= "api/canal/listar";

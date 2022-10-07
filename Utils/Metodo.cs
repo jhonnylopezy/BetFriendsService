@@ -79,7 +79,7 @@ namespace Utils
                     switch (requestType)
                     {
                         case RequestType.POST:
-                            resultadoJson = client.UploadString(urlBetFriend + method, JsonConvert.SerializeObject(paramJson));
+                            resultadoJson = client.UploadString(urlBetFriend + method, paramJson);
                             break;
                         case RequestType.GET:
                             resultadoJson = client.DownloadString(urlBetFriend + method);

@@ -6,6 +6,8 @@ using Npgsql;
 using System;
 using System.Threading.Tasks;
 using Dapper;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BF.DataAccess
 {
@@ -35,7 +37,7 @@ namespace BF.DataAccess
 
         public async Task<ParticipanteEntity> ValidarParticipante(LoginRequestModel loginRequestModel)
         {
-            var respuesta = new ParticipanteEntity();
+            IEnumerable<ParticipanteEntity> respuesta;
             var sql = @"SELECT * FROM bet.validar_participante(@usuario,@clave)";
             var sqlParam = new
             {
@@ -44,9 +46,11 @@ namespace BF.DataAccess
             };
             using (var connection = new NpgsqlConnection(this.cadenaConexion))
             {
-                respuesta = await connection.QueryFirstAsync<ParticipanteEntity>(sql, sqlParam);
+                respuesta = await connection.QueryAsync<ParticipanteEntity>(sql, sqlParam);
             }
-            return respuesta;
+            if (!respuesta.Any())
+                throw new ArgumentException("BET005|Usuario y clave invalido");
+            return respuesta.First();
         }
     }
 }

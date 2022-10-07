@@ -10,5 +10,6 @@ namespace BF.Domain.Interface
     public interface IParticipanteService
     {
         Task<ParticipanteDTO> CrearParticipante(ParticipanteModel participanteModel);
+        Task<RespuestaModel<ParticipanteDTO>> Get(LoginRequestModel loginRequestModel);
     }
 }

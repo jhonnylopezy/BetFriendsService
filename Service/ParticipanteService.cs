@@ -29,5 +29,33 @@ namespace Service
 
             return participante;
         }
+
+        public async Task<RespuestaModel<ParticipanteDTO>> Get(LoginRequestModel loginRequestModel)
+        {
+            //var participanteEntity = await this._participanteData.ValidarParticipante(loginRequestModel);
+            //var participante = new ParticipanteDTO
+            //{
+            //    id = participanteEntity.id,
+            //    usuario = participanteEntity.usuario,
+            //    email = participanteEntity.email,
+            //    estado = participanteEntity.estado,
+            //    imagen = participanteEntity.imagen
+            //};
+
+            //return participante;
+            return await Utils.Metodo.FuncionConExcepcionAsync<ParticipanteDTO>( async() => {
+                var participanteEntity = await this._participanteData.ValidarParticipante(loginRequestModel);
+                var participante = new ParticipanteDTO
+                {
+                    id = participanteEntity.id,
+                    usuario = participanteEntity.usuario,
+                    email = participanteEntity.email,
+                    estado = participanteEntity.estado,
+                    imagen = participanteEntity.imagen
+                };
+
+                return participante;
+            });
+        }
     }
 }
