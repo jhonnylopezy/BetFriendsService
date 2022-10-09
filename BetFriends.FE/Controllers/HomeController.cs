@@ -1,6 +1,7 @@
 ﻿using BetFriends.FE.Integration;
 using BetFriends.FE.Models;
 using BetFriends.FE.Service;
+using BF.Domain.DTO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -43,7 +44,10 @@ namespace BetFriends.FE.Controllers
 
         public ActionResult CanalesXParticipante()
         {
-            var canales = this._canalService.CanalesXParticipante(1);
+            FormsIdentity id = (FormsIdentity)User.Identity;
+            FormsAuthenticationTicket ticket = id.Ticket;
+            var idParticipante=JsonConvert.DeserializeObject<ParticipanteDTO>(ticket.UserData);
+            var canales = this._canalService.CanalesXParticipante(idParticipante.id);
             ViewBag.Canales = canales;
 
             return View();
@@ -101,7 +105,7 @@ namespace BetFriends.FE.Controllers
                 var participante = this._participanteService.ObtenerParticipante(loginView.UserName, loginView.Password);
                 if (participante!=null)
                 {
-                    var userData = JsonConvert.SerializeObject(loginView);
+                    var userData = JsonConvert.SerializeObject(participante);
                     var authTicket = new FormsAuthenticationTicket(1, loginView.UserName, DateTime.Now, DateTime.Now.AddMinutes(this.tiempoSesion), false, userData);
 
                     var enTicket = FormsAuthentication.Encrypt(authTicket);

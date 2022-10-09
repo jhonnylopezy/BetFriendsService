@@ -6,7 +6,7 @@ namespace BF.Domain.DTO
 {
     public class ParticipanteDTO
     {
-        public string id { get; set; }
+        public int id { get; set; }
         public string usuario { get; set; }        
         public string email { get; set; }
         public string estado { get; set; }
