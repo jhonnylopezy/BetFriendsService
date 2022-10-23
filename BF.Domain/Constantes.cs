@@ -26,6 +26,7 @@ namespace BF.Domain
     public static class ParticipanteMethod
     {
         public const string OBTENER_PARTICIPANTE= "api/Participante/ObtenerParticipante";
+        public const string CREAR_PARTICIPANTE = "api/Participante/Create";
 
     }
     public static class CanalMethod

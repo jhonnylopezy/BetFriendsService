@@ -127,7 +127,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CrearParticipanteView.cs" />
     <Compile Include="Models\LoginView.cs" />
+    <Compile Include="Models\RegistrarPronosticoView.cs" />
+    <Compile Include="Models\SuscribirEnCancalView.cs" />
     <Compile Include="Service\CanalService.cs" />
     <Compile Include="Service\JornadaService.cs" />
     <Compile Include="Service\ParticipanteService.cs" />
@@ -180,7 +183,9 @@
     <None Include=".dockerignore">
       <DependentUpon>Dockerfile</DependentUpon>
     </None>
+    <Content Include="Scripts\global.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\pronosticoPartido.js" />
     <Content Include="Scripts\sidebars.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -201,6 +206,7 @@
     <Content Include="Views\Home\PartidoPorJornada.cshtml" />
     <Content Include="Views\Home\PronosticoXCanal.cshtml" />
     <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Home\CrearParticipante.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
