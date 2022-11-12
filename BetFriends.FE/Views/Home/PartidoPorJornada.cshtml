@@ -6,45 +6,45 @@
 
 <form>
     <div class="row  gx-2" style="padding-top:100px">
-      
-            @for (int i = 0; i < Model.Count; i++)
-            {
-                <div id="@Model[i].id_partido-d" class="col-4 padre" style=" background-color: #d3d9d3; border: 3px solid;">
-                    <div style="display:inline-block">
-                        <div style="display:block">
-                            <img src="@Model[i].imagen" width="50px" height="50px" />
-                        </div>
 
-                        <div class="form-check form-check-inline" style="display:block">
-                            @*<input class="form-check-input" type="radio" name="@Model[i].id_partido" id="@Model[i].id_partido_equipo" value="option1">*@
-                            <label class="form-check-label" for="inlineRadio1">@Model[i].nombre_equipo</label>
-                        </div>
-                    </div>
-                    <div style="display:inline-block">
-                        <div>
-                            <input type="number" name="name" value="0" style="width:50px;display:inline" id="@Model[i].id_partido_equipo" />
-                            <h3 style="display: inline">VS</h3>
-                            <input type="number" name="name" value="0" style="width: 50px;display: inline" id="@Model[i+1].id_partido_equipo" />
-                        </div>
-                        <div class="form-check form-check-inline">
-                            @*<input class="form-check-input" type="radio" name="@Model[i].id_partido" id="@Model[i].id_partido_equipo-c" value="option2">*@
-                            <label class="form-check-label" for="inlineRadio2">Empate</label>
-                        </div>
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            <div id="@Model[i].id_partido-d" class="col-4 padre" style=" background-color: #d3d9d3; border: 3px solid;">
+                <div style="display:inline-block">
+                    <div style="display:block">
+                        <img src="@Model[i].imagen" width="50px" height="50px" />
                     </div>
 
-                    <div style="display:inline-block">
-                        <div style="display:block">
-                            <img src="@Model[i + 1].imagen" width="50px" height="50px" />
-                        </div>
-
-                        <div class="form-check form-check-inline" style="display:block">
-                            @*<input class="form-check-input" type="radio" name="@Model[i].id_partido" id="@Model[i+1].id_partido_equipo" value="option3">*@
-                            <label class="form-check-label" for="inlineRadio3">@Model[i + 1].nombre_equipo</label>
-                        </div>
+                    <div class="form-check form-check-inline" style="display:block">
+                        @*<input class="form-check-input" type="radio" name="@Model[i].id_partido" id="@Model[i].id_partido_equipo" value="option1">*@
+                        <label class="form-check-label" for="inlineRadio1">@Model[i].nombre_equipo</label>
                     </div>
                 </div>
-                i++;
-            }
+                <div style="display:inline-block">
+                    <div>
+                        <input type="number" name="name" value="0" style="width:50px;display:inline" id="@Model[i].id_partido_equipo" />
+                        <h3 style="display: inline">VS</h3>
+                        <input type="number" name="name" value="0" style="width: 50px;display: inline" id="@Model[i+1].id_partido_equipo" />
+                    </div>
+                    <div class="form-check form-check-inline">
+                        @*<input class="form-check-input" type="radio" name="@Model[i].id_partido" id="@Model[i].id_partido_equipo-c" value="option2">*@
+                        <label class="form-check-label" for="inlineRadio2">Empate</label>
+                    </div>
+                </div>
+
+                <div style="display:inline-block">
+                    <div style="display:block">
+                        <img src="@Model[i + 1].imagen" width="50px" height="50px" />
+                    </div>
+
+                    <div class="form-check form-check-inline" style="display:block">
+                        @*<input class="form-check-input" type="radio" name="@Model[i].id_partido" id="@Model[i+1].id_partido_equipo" value="option3">*@
+                        <label class="form-check-label" for="inlineRadio3">@Model[i + 1].nombre_equipo</label>
+                    </div>
+                </div>
+            </div>
+            i++;
+        }
 
     </div>
     <button id="butVolver" type="button" class="btn btn-secondary" onclick="javascript: VolverAnteriorPantalla(@ViewBag.idCanal)">Volver</button>
@@ -52,16 +52,29 @@
     <button type="button" class="btn btn-primary" onclick="RegistrarPronostico()">Registrar Pronostico</button>
 </form>
 <script src="https://cdn.jsdelivr.net/npm/jquery/dist/jquery.min.js"></script>
+<script src="~/Scripts/global.js"></script>
 <script>
     function VolverAnteriorPantalla(idCanal) {
         location.href = '@Url.Action("PronosticoXCanal","Home")?idCanal=' + idCanal;
     }
-    function RegistrarPronostico() {
-        var datoJson = {
-            id_participante_canal: 0,
+    async function RegistrarPronostico() {
+
+        var datoJson = await GenerarDatoJson();
+            console.log(datoJson);
+        sendDataWebService(urlService + "Pronostico/Registrar", datoJson, function (result) {
+
+            console.log("resultado: " + result);
+
+        });
+
+    }
+    var GenerarDatoJson = async function () {
+         var datoJson = {
+            id_participante_canal: parseInt('@Html.Raw(Convert.ToInt16(ViewBag.idCanal))'),
             nombre: "",
             partidos: []
         };
+        var cantidadGoles = 0;
         $(".padre").each(function (index, elementoPadre) {
             var partido = {};
             partido.id_partido = elementoPadre.id.replace("-d","");
@@ -72,14 +85,14 @@
                     id_partido_equipo: elementoHijo.id,
                     cantidad_gol: elementoHijo.value
                 }
-
+                cantidadGoles = cantidadGoles+equipo.cantidad_gol;
                 partido.partido_equipo.push(equipo);
             });
-
+            partido.empate = cantidadGoles % 2 == 0;
             datoJson.partidos.push(partido);
+            cantidadGoles = 0;
         });
-
-        console.log(datoJson);
+        return datoJson;
     }
 </script>
 
