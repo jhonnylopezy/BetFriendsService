@@ -1,6 +1,6 @@
 ﻿
 var urlService = "http://localhost/betFriendsService/api/";
-
+//var urlService = "https://localhost:44343/api/";
 var sendDataController = function (action, data, callback, msg) {
     console.log("URL: ", document.URL + action + data);
     $.ajax({

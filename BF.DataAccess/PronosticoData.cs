@@ -23,7 +23,7 @@ namespace BF.DataAccess
         public async Task<IEnumerable<RespuestaFunctionModel>> Registrar(string pronosticoData)
         {
             IEnumerable<RespuestaFunctionModel> respuesta = null;
-            var sql = @"SELECT * FROM bet.registrar_pronostico(@pronostico_data)";
+            var sql = @"SELECT registrar_pronostico as returns FROM bet.registrar_pronostico(@pronostico_data)";
             var sqlParam = new
             {
                 pronostico_data = pronosticoData

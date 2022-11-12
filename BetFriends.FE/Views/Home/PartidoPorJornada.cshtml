@@ -60,10 +60,10 @@
     async function RegistrarPronostico() {
 
         var datoJson = await GenerarDatoJson();
-            console.log(datoJson);
+        console.log(JSON.stringify(datoJson));
         sendDataWebService(urlService + "Pronostico/Registrar", datoJson, function (result) {
 
-            console.log("resultado: " + result);
+            console.log("resultado: " + JSON.stringify(result));
 
         });
 
@@ -71,22 +71,22 @@
     var GenerarDatoJson = async function () {
          var datoJson = {
             id_participante_canal: parseInt('@Html.Raw(Convert.ToInt16(ViewBag.idCanal))'),
-            nombre: "",
+            nombre: "PRUEBA WEB",
             partidos: []
         };
         var cantidadGoles = 0;
         $(".padre").each(function (index, elementoPadre) {
             var partido = {};
-            partido.id_partido = elementoPadre.id.replace("-d","");
+            partido.id_partido = parseInt(elementoPadre.id.replace("-d",""));
             partido.empate = false;
-            partido.partido_equipo = [];
+            partido.partido_equipos = [];
             $("#" + elementoPadre.id + " input").each(function (index, elementoHijo) {
                 var equipo = {
-                    id_partido_equipo: elementoHijo.id,
-                    cantidad_gol: elementoHijo.value
+                    id_partido_equipo: parseInt(elementoHijo.id),
+                    cantidad_gol: parseInt(elementoHijo.value)
                 }
                 cantidadGoles = cantidadGoles+equipo.cantidad_gol;
-                partido.partido_equipo.push(equipo);
+                partido.partido_equipos.push(equipo);
             });
             partido.empate = cantidadGoles % 2 == 0;
             datoJson.partidos.push(partido);
