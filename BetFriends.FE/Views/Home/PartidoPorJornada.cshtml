@@ -63,7 +63,10 @@
         console.log(JSON.stringify(datoJson));
         sendDataWebService(urlService + "Pronostico/Registrar", datoJson, function (result) {
 
-            console.log("resultado: " + JSON.stringify(result));
+            if (result.errMessage == "") {
+                alert("Registro exitoso");
+                location.href = '@Url.Action("PronosticoXCanal","Home")?idCanal=' + parseInt('@Html.Raw(Convert.ToInt16(ViewBag.idCanal))');
+            }
 
         });
 

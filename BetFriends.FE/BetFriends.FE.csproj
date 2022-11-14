@@ -139,30 +139,39 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\icon\arabia-saudita.png" />
+    <Content Include="Content\icon\argentina.png" />
+    <Content Include="Content\icon\australia.png" />
     <Content Include="Content\icon\belgium.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\icon\brazil.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\icon\dinamarca.png" />
     <Content Include="Content\icon\ecuador.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\icon\francia.png" />
+    <Content Include="Content\icon\gales.png" />
     <Content Include="Content\icon\germany.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\icon\iran.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\icon\mexico.png" />
     <Content Include="Content\icon\netherlands.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\icon\polonia.png" />
     <Content Include="Content\icon\qatar.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\icon\senegal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\icon\tunez.png" />
     <Content Include="Content\icon\ukraine.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
